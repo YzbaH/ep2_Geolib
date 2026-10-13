@@ -53,3 +53,12 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# LaTeX arquvis temporarios
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
