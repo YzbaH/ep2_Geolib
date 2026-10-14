@@ -1,8 +1,9 @@
 #include "GeoEspacial.h"
 
 #define PI 3.14
-#define SQRT3 1.73
 #define SQRT2 1.41
+#define SQRT3 1.73
+
 
 
 geo_status areaCubo(const geo_cubo *a, double *area){
@@ -55,6 +56,62 @@ geo_status areaTetraedro(const geo_tetraedro *t, double *area){
     if (t->aresta <= 0) return GEO_ERR_INVALID;
 
     *area =  (t->aresta) * (t->aresta) * SQRT3;
+
+    return GEO_OK;
+}
+
+geo_status volumeCubo(const geo_cubo *a, double *volume){
+    if(a == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(a->aresta <= 0) return GEO_ERR_INVALID;
+
+    *volume = (a->aresta) * (a->aresta) * (a->aresta);
+
+    return GEO_OK;
+}
+
+geo_status volumeParalelepipedo(const geo_paralelepipedo *p, double *volume){
+    if(p == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(p->comprimento <= 0 || p->largura <= 0 || p->altura <= 0) return GEO_ERR_INVALID;
+
+    *volume = (p->comprimento) * (p->largura) * (p->altura);
+
+    return GEO_OK;
+}
+
+geo_status volumeEsfera(const geo_esfera *e, double *volume){
+    if(e == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(e->raio <= 0) return GEO_ERR_INVALID;
+
+    double r = e->raio;
+    *volume = (4.0 * PI * r * r * r)/ 3;
+
+    return GEO_OK;
+}
+
+geo_status volumeCilindro(const geo_cilindro *c, double *volume){
+    if(c == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(c->raio <= 0 || c->altura <= 0) return GEO_ERR_INVALID;
+
+    *volume = PI * (c->raio) * (c->raio) * (c->altura);
+
+    return GEO_OK;
+}
+
+geo_status volumeCone(const geo_cone *c, double *volume){
+    if(c == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(c->raio <= 0 || c->altura <= 0) return GEO_ERR_INVALID;
+
+    *volume = (PI * (c->raio) * (c->raio) * (c->altura)) / 3.0;
+
+    return GEO_OK;
+}
+
+geo_status volumeTetraedro(const geo_tetraedro *t, double *volume){
+    if(t == NULL || volume == NULL) return GEO_ERR_NULL;
+    if(t->aresta <= 0) return GEO_ERR_INVALID;
+    
+    double a = t->aresta;
+    *volume = (a * a * a * SQRT2)/ 12.0;
 
     return GEO_OK;
 }
