@@ -39,6 +39,7 @@ typedef struct {
 /** Cone */
 typedef struct {
     double raio;
+    double altura;
     double geratriz;
 } geo_cone;
 
@@ -133,5 +134,91 @@ geo_status areaCone(const geo_cone *c, double *area);
 * @note A função usa 1,73 como valor de raiz de 3.
 */ 
 geo_status areaTetraedro(const geo_tetraedro *t, double *area);
+
+/**
+* @brief Calcula o volume de um cubo.
+* @param a Ponteiro para um cubo com a medida de sua aresta.
+* @param volume Ponteiro para armazenar o volume calculado.
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se a ou volume for NULL;
+*         GEO_ERR_INVALID se a->aresta <= 0.
+* @pre a != NULL.
+* @pre volume != NULL.
+* @pre a->aresta > 0
+*/ 
+geo_status volumeCubo(const geo_cubo *a, double *volume);
+
+/**
+* @brief Calcula o volume de um paralelepipedo reto retângulo.
+* @param p Ponteiro para um paralelepípedo com suas medidas.
+* @param volume Ponteiro para armazenar o volume calculado.
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se p ou volume for NULL;
+*         GEO_ERR_INVALID se p->comprimento <= 0, p->largura <= 0 ou p->altura <= 0.
+* @pre p->comprimento > 0.
+* @pre p->largura > 0.
+* @pre p->altura > 0.
+* @pre p != NULL.
+* @pre volume != NULL.
+*/ 
+geo_status volumeParalelepipedo(const geo_paralelepipedo *p, double *volume);
+
+/**
+* @brief Calcula o volume de uma esfera.
+* @param e Ponteiro para uma esfera com a medida do seu raio.
+* @param volume Ponteiro para armazenar o volume calculado. 
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se e ou volume for NULL;
+*         GEO_ERR_INVALID se e->raio <= 0.
+* @pre e->raio > 0.
+* @pre e != NULL.
+* @pre volume != NULL.
+* @note A função usa 3.14 como valor de π(pi).
+*/ 
+geo_status volumeEsfera(const geo_esfera *e, double *volume);
+
+/**
+* @brief Calcula o volume de um cilindro.
+* @param c Ponteiro para um cilindro com seu raio e altura.
+* @param volume Ponteiro para armazenar o volume calculado.
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se c ou volume for NULL;
+*         GEO_ERR_INVALID se c->raio <= 0 ou c->altura <= 0.
+* @pre c->raio > 0.
+* @pre c->altura > 0.
+* @pre c != NULL.
+* @pre volume != NULL.
+* @note A função usa 3.14 como valor de π(pi).
+*/ 
+geo_status volumeCilindro(const geo_cilindro *c, double *volume);
+
+/**
+* @brief Calcula o volume de um cone.
+* @param c Ponteiro para cone com seu raio e altura.
+* @param volume Ponteiro para armazenar o volume calculado. 
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se c ou volume for NULL;
+*         GEO_ERR_INVALID se c->raio <= 0 ou c->altura <= 0
+* @pre c->raio > 0.
+* @pre c->altura > 0.
+* @pre c != NULL.
+* @pre volume != NULL.
+* @note A função usa 3.14 como valor de π(pi).
+*/ 
+geo_status volumeCone(const geo_cone *c, double *volume);
+
+/**
+* @brief Calcula volume de um Tetraedro regular.
+* @param t Ponteiro para tetraedro regular.
+* @param volume Ponteiro para armazenar o volume calculado.  
+* @return GEO_OK em caso de sucesso;
+*         GEO_ERR_NULL se t ou volume for NULL;
+*         GEO_ERR_INVALID se t->aresta <= 0.
+* @pre t->aresta > 0.
+* @pre t != NULL.
+* @pre volume != NULL.
+* @note A função usa 1,41 como valor de raiz de 2.
+*/ 
+geo_status volumeTetraedro(const geo_tetraedro *t, double *volume);
 
 #endif /* GEOESPACIAL_H */
