@@ -32,8 +32,14 @@ geo_status geo_triangle_area(const geo_triangle2d *t, double *out_area) {
     return GEO_OK;
 }
 
-static double dist_points(geo_point2d a, geo_point2d b){
+static double dist_points(geo_point2d a, geo_point2d b) {
     return hypot(a.x - b.x, a.y - b.y);
+}
+
+geo_status geo_dist_points(geo_point2d a, geo_point2d b, double *out_dist){
+      if(out_dist == NULL) return GEO_ERR_NULL;
+      *out_dist = dist_points(a, b);
+      return GEO_OK;
 }
 
 geo_status geo_triangle_perimeter(const geo_triangle2d *t, double *out_perimeter) {
@@ -63,17 +69,38 @@ geo_status geo_triangle_classify(const geo_triangle2d *t, geo_triangle_type *out
 }
 
 geo_status geo_circle_create(geo_point2d center, double radius, geo_circle2d *out_circle) {
-    return GEO_ERR_INVALID;
+    if (out_circle == NULL) return GEO_ERR_NULL;
+
+    if (radius <= 0.0) return GEO_ERR_INVALID;
+
+    out_circle->center = center;
+    out_circle->radius = radius;
+
+    return GEO_OK;
 }
 
 geo_status geo_circle_area(const geo_circle2d *c, double *out_area) {
-    return GEO_ERR_INVALID;
+    if (c == NULL || out_area == NULL) return GEO_ERR_NULL;
+
+    *out_area = GEO_PI * c->radius * c->radius;
+
+    return GEO_OK;
 }
 
 geo_status geo_circle_perimeter(const geo_circle2d *c, double *out_perimeter) {
-    return GEO_ERR_INVALID;
+    if (c == NULL || out_perimeter == NULL) return GEO_ERR_NULL;
+
+    *out_perimeter = 2.0 * GEO_PI * c->radius;
+    return GEO_OK;
 }
 
 geo_status geo_circle_point_position(const geo_circle2d *c, geo_point2d p, geo_point_circle_pos *out_pos) {
-    return GEO_ERR_INVALID;
+    if(c == NULL || out_pos == NULL) return GEO_ERR_NULL;
+    double d = dist_points(c->center, p);
+
+    if (fabs(d - c->radius) < GEO_EPS) *out_pos = GEO_POINT_ON_CIRCLE;
+    else if (d < c->radius) *out_pos = GEO_POINT_INSIDE_CIRCLE;
+    else *out_pos = GEO_POINT_OUTSIDE_CIRCLE;
+    
+    return GEO_OK;
 }

@@ -7,7 +7,6 @@
 #define GEO_COMMON_H
 
 #include <stddef.h>
-#include <stdbool.h>
 #include <math.h>
 
 /** @brief Tolerância para comparações de double */
@@ -36,5 +35,13 @@ typedef struct {
     double y;
     double z;
 } geo_point3d;
+
+/**
+* @brief Compara se dois números são aproximadamente iguais sob a tolerância epsilon.
+* @param a,b Valores
+* @return 1 se forem iguais, 0 caso contrário.
+*/
+int geo_approx_equal(double a, double b);
+
 
 #endif /* GEO_COMMON_H */
