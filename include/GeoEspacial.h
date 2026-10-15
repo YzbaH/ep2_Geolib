@@ -6,6 +6,10 @@
 #ifndef GEOESPACIAL_H
 #define GEOESPACIAL_H
 
+
+/** @brief Tolerância para comparações de double */
+#define GEO_EPS 1e-9
+
 typedef enum {
     GEO_OK = 0,        /**< Operação realizado com sucesso*/ 
     GEO_ERR_NULL,       /**< Ponteiro nulo*/ 

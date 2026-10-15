@@ -1,4 +1,6 @@
 #include "GeoEspacial.h"
+#include <stddef.h>
+
 
 #define PI 3.14
 #define SQRT2 1.41

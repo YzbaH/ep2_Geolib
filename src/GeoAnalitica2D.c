@@ -1,5 +1,6 @@
 #include "GeoAnalitica2D.h"
 #include <math.h>
+#include <stddef.h>
 
 geo_status calculaCoefAngular(geo_ponto2d a, geo_ponto2d b, double *coefA){
     if (coefA == NULL) return GEO_ERR_NULL;
