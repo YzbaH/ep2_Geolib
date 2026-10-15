@@ -6,7 +6,11 @@
 #ifndef GEOANALITICA2D_H
 #define GEOANALITICA2D_H
 
-/* Códigos de status */ 
+/** @brief Tolerância para comparações de double */
+#define GEO_EPS 1e-9
+
+
+/** Códigos de status */ 
 typedef enum {
     GEO_OK = 0,        /**< Operação realizada com sucesso*/ 
     GEO_ERR_NULL,       /**< Ponteiro nulo*/ 
