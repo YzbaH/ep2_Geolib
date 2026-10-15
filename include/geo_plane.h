@@ -60,6 +60,14 @@ geo_status geo_triangle_create(geo_point2d a, geo_point2d b, geo_point2d c, geo_
 geo_status geo_triangle_area(const geo_triangle2d *t, double *out_area);
 
 /**
+* @brief Calcula a distância entre dois pontos no plano.
+* @param a,b Pontos no plano
+* @param out_dist [out] Distância calculada
+* @return GEO_OK ou GEO_ERR_NULL
+*/
+geo_status geo_dist_points(geo_point2d a, geo_point2d b, double *out_dist);
+
+/**
  * @brief Calcula o perímetro de um triângulo.
  * @param t Triângulo de entrada.
  * @param out_perimeter [out] Perímetro calculado.
