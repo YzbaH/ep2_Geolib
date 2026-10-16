@@ -6,17 +6,7 @@
 #ifndef GEOANALITICA2D_H
 #define GEOANALITICA2D_H
 
-/** @brief Tolerância para comparações de double */
-#define GEO_EPS 1e-9
-
-
-/** Códigos de status */ 
-typedef enum {
-    GEO_OK = 0,        /**< Operação realizada com sucesso*/ 
-    GEO_ERR_NULL,       /**< Ponteiro nulo*/ 
-    GEO_ERR_INVALID,    /**< Número invalido*/
-    GEO_ERR_DEGENERATE  /**< Forma geometrica degenerada*/ 
-} geo_status;
+#include "geo_common.h"
 
 /**Ponto 2D*/
 typedef struct{
