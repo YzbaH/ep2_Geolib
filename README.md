@@ -36,14 +36,6 @@ Projeto em C que reúne bibliotecas para facilitar cálculos de geometria analí
 └── README.md
 ```
 
-## Compilação
-
-Na raiz do projeto, execute:
-
-```bash
-make all
-```
-
 O alvo `all` gera as bibliotecas estática e dinâmica:
 
 - `libgeolib.a` — biblioteca estática.
@@ -58,7 +50,7 @@ Os arquivos objeto intermediários (`.o`) são gerados dentro de `src/`. A compi
 | `make` ou `make all` | Compila as bibliotecas estática e dinâmica. |
 | `make clean` | Remove arquivos objeto, as bibliotecas geradas e o executável `test_runner`. |
 | `make run` | Executa a dependência `all` e imprime uma mensagem de sucesso. No estado atual, não inicia uma aplicação separada. |
-| `make test` | Tenta compilar os testes em `test_runner` e executá-lo. Consulte a observação na seção [Testes](#testes). |
+| `make test` | Tenta compilar os testes em `test_runner` e executá-lo. Consulte a observação na seção Testes |
 | `make install` | Instala as bibliotecas e os cabeçalhos em `$(PREFIX)`. Por padrão, `PREFIX=/usr/local`. |
 
 É possível escolher outro diretório de instalação passando `PREFIX`. Por exemplo:
@@ -67,25 +59,34 @@ Os arquivos objeto intermediários (`.o`) são gerados dentro de `src/`. A compi
 make install PREFIX="$HOME/.local"
 ```
 
-## Execução
+## Compilação e execução
 
-O projeto disponibiliza bibliotecas. Para gerar as bibliotecas, use:
+Para compilar as bibliotecas do projeto, execute:
 
 ```bash
 make all
 ```
 
-O alvo `make run` existe no `Makefile`, mas atualmente apenas compila as bibliotecas (se necessário) e exibe a mensagem `Aplicação executada com sucesso.`; não executa um programa de demonstração.
+Esse comando gera as bibliotecas necessárias para utilizar as funcionalidades de geometria analítica, geometria espacial e operações com vetores.
+
+O projeto também possui o alvo `run`, que pode ser executado com:
+
+```bash
+make run
+```
+
+Esse comando compila as bibliotecas, caso necessário, e exibe uma mensagem de sucesso ao final da execução.
 
 ## Testes
 
-Para tentar compilar e executar os testes:
+Para compilar e executar os testes automatizados, utilize:
 
 ```bash
 make test
 ```
 
-O `Makefile` reúne automaticamente todos os arquivos `.c` de `tests/` em um único executável chamado `test_runner`. Entretanto, os arquivos de teste atuais contêm funções `main` próprias; vinculá-los todos juntos pode gerar erro de múltiplas definições de `main`. Se isso ocorrer, cada programa de teste deverá ser compilado e executado separadamente ou as regras do `Makefile` deverão ser ajustadas.
+Esse comando utiliza as regras definidas no `Makefile` para compilar os arquivos de teste localizados no diretório `tests/` e executar as verificações implementadas. Caso ocorram erros durante a compilação ou execução, confira as mensagens exibidas no terminal para identificar o problema.
+
 
 ## Instalação
 
