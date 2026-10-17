@@ -1,5 +1,5 @@
 
-# GeoLib — Bibliotecas de Geometria e Vetores em C
+# Biblioteca de Geometria e Vetores em C
 
 Projeto em C que reúne bibliotecas para facilitar cálculos de geometria analítica no plano e geometria espacial. Também conta com operações auxiliares envolvendo pontos, retas, figuras geométricas e vetores, incluindo cálculos e operações vetoriais. A ideia é organizar essas funcionalidades em módulos, deixando o código mais simples de reutilizar e facilitando a criação de outros programas que precisem desses recursos.
 
