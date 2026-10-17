@@ -114,4 +114,4 @@ Para remover os artefatos gerados na pasta do projeto:
 make clean
 ```
 
-> `make clean` remove os arquivos gerados dentro do projeto; ele não desinstala arquivos que já tenham sido copiados para o diretório de instalação.
+> `make clean` remove os arquivos gerados dentro do projeto, ele não desinstala arquivos que já tenham sido copiados para o diretório de instalação e não desinstala as bibliotecas.
