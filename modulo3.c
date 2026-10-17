@@ -5,12 +5,7 @@
 
 #define GEO_EPS 1e-9
 
-typedef enum {
-    GEO_OK = 0,       
-    GEO_ERR_NULL,      
-    GEO_ERR_INVALID,   
-    GEO_ERR_DEGENERATE   
-} geo_status;
+
 
 
 geo_status somavec2(vec2 a, vec2 b,vec2 *outresult){
@@ -29,7 +24,7 @@ geo_status subtraivec2(vec2 a, vec2 b,vec2 *outresult){
     outresult->y = a.y - b.y;
     return GEO_OK;
 }
-geo_status multplicaescalar(vec2 a, double b,vec2 *outresult){
+geo_status multescalarv2(vec2 a, double b,vec2 *outresult){
     if(outresult == NULL){
         return GEO_ERR_NULL;
     }
@@ -37,14 +32,14 @@ geo_status multplicaescalar(vec2 a, double b,vec2 *outresult){
     outresult->y = a.y * b;
     return GEO_OK;
 }
-geo_status produtoescalar(vec2 a, vec2 b, double *outresult ){
+geo_status produtoescalarv2(vec2 a, vec2 b, double *outresult ){
     if(outresult == NULL){
         return GEO_ERR_NULL;
     }
     *outresult = (a.x * b.x) + (a.y * b.y);
     return GEO_OK;
 }
-geo_status dependencialinear(vec2 a, vec2 b, int *eld){
+geo_status dependencialinearv2(vec2 a, vec2 b, int *eld){
     if (eld == NULL) {
         return GEO_ERR_NULL;
     }
@@ -125,11 +120,12 @@ geo_status igauldadev2(vec2 a, vec2 b, int *outresult){
     if(outresult == NULL){
         return GEO_ERR_NULL;
     }
-    if(a.x == b.x && a.y == b.y){
+    if(fabs(a.x - b.x) < GEO_EPS && fabs(a.y - b.y) < GEO_EPS){
         *outresult = 1;
-    }else{
+    } else {
         *outresult = 0;
     }
+    return GEO_OK;
 
 }
 // Operações vec3
@@ -266,13 +262,14 @@ geo_status igauldadev3(vec3 a, vec3 b, int *igual){
     if(igual == NULL){
         return GEO_ERR_NULL;
     }
-    if(a.x == b.x && a.y == b.y && a.z == b.z){
+    if(fabs(a.x - b.x) < GEO_EPS && 
+       fabs(a.y - b.y) < GEO_EPS && 
+       fabs(a.z - b.z) < GEO_EPS){
         *igual = 1;
-    }else{
+    } else {
         *igual = 0;
     }
     return GEO_OK;
-
 
 }
 

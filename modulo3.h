@@ -17,14 +17,14 @@ typedef enum {
 /**
  * @brief vetor 2D
  */
-typedef struct {
+typedef struct vec2 {
     double x;
     double y;
 }vec2;
 /**
  *@brief vetor 3D
  */
-typedef struct {
+typedef struct vec3 {
     double x;
     double y;
     double z;
@@ -71,7 +71,7 @@ geo_status produtoescalarv2(vec2 a, vec2 b, double *outresult );
  * @param éld ponteiro int (*éld = 1(LD), *éld = 0(LI))
  * @return GEO_OK ou GEO_ERRO_NULL
  */
-geo_status dependencialinearv2(vec2 a, vec2 b, int *éld);
+geo_status dependencialinearv2(vec2 a, vec2 b, int *eld);
 /**
  * @brief calcula a norma do vetor
  * @param a vec 2D
@@ -145,7 +145,7 @@ geo_status produtoescalarv3(vec3 a, vec3 b, vec3 *outresult);
  * @param outresult Ponteiro que aponta para o vetor 3D resultado
  * @return GEO_OK ou GEO_ERR_NULL
  */
-geo_status produtovetorialv3(vec3 a, vec3 b, vec3 *outresult); 
+geo_status produtovetorialv3(vec3 a, vec3 b, double *outresult); 
 /**
  * @brief verifica se 2 vetores 3D são LI ou LD
  * @param a vec 3D 1
@@ -156,7 +156,7 @@ geo_status produtovetorialv3(vec3 a, vec3 b, vec3 *outresult);
 geo_status dependencialinearv3(vec3 a, vec3 b, int *eld);
 /**
  * @brief calcula a norma do vetor
- * @param a vec 2D
+ * @param a vec 3D
  * @param outresult ponteiro que aponta para o resultado
  * @return GEO_OK ou GEO_ERR_NULL 
  */
@@ -179,8 +179,8 @@ geo_status angulovec3(vec3 a, vec3 b, double *outresult);
 geo_status normalizav3(vec3 a,vec3 *outresult);
 /**
  * @brief avalie se dois vetroes são iguais ou não
- * @param a vetor 2D
- * @param b vetor 2D
+ * @param a vetor 3D
+ * @param b vetor 3D
  * @param igual ponteiro que aponta para o resultadoou (*igual = 1 se sao iguais, 0 caso contrario)
  * @return GEO_OK ou ou GEO_ERR_NULL
  */
