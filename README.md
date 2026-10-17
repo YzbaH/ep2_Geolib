@@ -1,40 +1,116 @@
-# Biblioteca de Vetores e Geometria em C
 
-Uma biblioteca desenvolvida C que reúne funções para fazer cálculos de geometria, trabalhar com pontos e vetores e resolver problemas envolvendo figuras planas, retas e sólidos geométricos, incluindo o estudo de posições relativas entre retas no plano cartesiano.
+# GeoLib — Bibliotecas de Geometria e Vetores em C
+
+Projeto em C que reúne bibliotecas para facilitar cálculos de geometria analítica no plano e geometria espacial. Também conta com operações auxiliares envolvendo pontos, retas, figuras geométricas e vetores, incluindo cálculos e operações vetoriais. A ideia é organizar essas funcionalidades em módulos, deixando o código mais simples de reutilizar e facilitando a criação de outros programas que precisem desses recursos.
 
 
 ## Pré-requisitos
 
-* **Compilador C:** GCC ou outro compilador compatível com o padrão C utilizado pelo projeto.
-* **GNU Make:** para automatizar a compilação por meio do `Makefile`.
-* **Biblioteca matemática:** funções como `sqrt()` e `fabs()` são utilizadas em cálculos geométricos.
-* **Arquivos do projeto:** cabeçalhos (`.h`) e implementações (`.c`) correspondentes aos módulos utilizados.
+- Sistema compatível com ferramentas GNU/Linux.
+- GCC para compilar o código C.
+- GNU Make para executar os alvos do projeto.
+- Biblioteca matemática padrão do C (`libm`), vinculada com `-lm` nos testes.
 
-## Módulos da biblioteca
+## Estrutura do projeto
 
-* **Geometria Analítica 2D:** coeficiente angular, distâncias, ponto médio, interseção e posição relativa de retas.
-* **Geometria Plana:** colinearidade, triângulos, círculos, áreas, perímetros e posição de pontos em relação a círculos.
-* **Geometria Espacial:** áreas e volumes de sólidos geométricos.
-* **Geometria Vetorial 2D e 3D:** operações com vetores, produtos escalares e vetoriais, normas, ângulos, normalização e dependência linear.
-
-### Códigos de status
-
-As funções que utilizam `geo_status` podem retornar os seguintes códigos para indicar o resultado da operação:
-* `GEO_OK`: operação realizada com sucesso.
-* `GEO_ERR_NULL`: ponteiro nulo.
-* `GEO_ERR_INVALID`: parâmetro inválido.
-* `GEO_ERR_DEGENERATE`: situação geométrica degenerada.
-
-
+```text
+.
+├── include/                 # Cabeçalhos públicos e tipos compartilhados
+│   ├── GeoAnalitica2D.h      # Geometria analítica no plano
+│   ├── GeoEspacial.h         # Áreas e volumes de sólidos
+│   ├── geo_common.h          # Tipos e utilitários comuns
+│   ├── geo_plane.h           # Operações com figuras planas
+│   └── vecoperations.h       # Operações com vetores 2D e 3D
+├── src/                     # Implementações das bibliotecas
+│   ├── GeoAnalitica2D.c
+│   ├── GeoEspacial.c
+│   ├── geo_common.c
+│   ├── geo_plane.c
+│   └── vecoperations.c
+├── tests/                   # Programas de teste
+│   ├── test_geoAnalitica2D.c
+│   ├── test_geoEspacial.c
+│   ├── test_plane.c
+│   └── test_vecoperation.c
+├── Makefile                 # Regras de compilação, testes e instalação
+└── README.md
+```
 
 ## Compilação
 
-A compilação é realizada por meio do `Makefile`.
+Na raiz do projeto, execute:
 
+```bash
+make all
+```
+
+O alvo `all` gera as bibliotecas estática e dinâmica:
+
+- `libgeolib.a` — biblioteca estática.
+- `libgeolib.so` — biblioteca dinâmica compartilhada.
+
+Os arquivos objeto intermediários (`.o`) são gerados dentro de `src/`. A compilação usa `gcc` com as opções `-Wall -Wextra -Iinclude -fPIC -g`.
+
+## Alvos do Makefile
+
+| Comando | Descrição |
+|---|---|
+| `make` ou `make all` | Compila as bibliotecas estática e dinâmica. |
+| `make clean` | Remove arquivos objeto, as bibliotecas geradas e o executável `test_runner`. |
+| `make run` | Executa a dependência `all` e imprime uma mensagem de sucesso. No estado atual, não inicia uma aplicação separada. |
+| `make test` | Tenta compilar os testes em `test_runner` e executá-lo. Consulte a observação na seção [Testes](#testes). |
+| `make install` | Instala as bibliotecas e os cabeçalhos em `$(PREFIX)`. Por padrão, `PREFIX=/usr/local`. |
+
+É possível escolher outro diretório de instalação passando `PREFIX`. Por exemplo:
+
+```bash
+make install PREFIX="$HOME/.local"
+```
+
+## Execução
+
+O projeto disponibiliza bibliotecas. Para gerar as bibliotecas, use:
+
+```bash
+make all
+```
+
+O alvo `make run` existe no `Makefile`, mas atualmente apenas compila as bibliotecas (se necessário) e exibe a mensagem `Aplicação executada com sucesso.`; não executa um programa de demonstração.
 
 ## Testes
 
-O projeto possui testes para os módulos de geometria analítica 2D, geometria plana e geometria espacial. Eles verificam se as operações geométricas estão sendo feitas corretamente ou se foram inseridos parâmetros inválidos ou ponteiros nulos.
+Para tentar compilar e executar os testes:
 
+```bash
+make test
+```
 
+O `Makefile` reúne automaticamente todos os arquivos `.c` de `tests/` em um único executável chamado `test_runner`. Entretanto, os arquivos de teste atuais contêm funções `main` próprias; vinculá-los todos juntos pode gerar erro de múltiplas definições de `main`. Se isso ocorrer, cada programa de teste deverá ser compilado e executado separadamente ou as regras do `Makefile` deverão ser ajustadas.
 
+## Instalação
+
+Por padrão, a instalação copia:
+
+- `libgeolib.a` para `$(PREFIX)/lib/`;
+- `libgeolib.so` para `$(PREFIX)/lib/`;
+- todos os arquivos `.h` de `include/` para `$(PREFIX)/include/`.
+
+O prefixo padrão é `/usr/local`, que normalmente exige permissões administrativas. Para instalar nesse local:
+
+```bash
+sudo make install
+```
+
+Ou instale em um diretório do usuário, sem `sudo`:
+
+```bash
+make install PREFIX="$HOME/.local"
+```
+
+Para remover os artefatos gerados na pasta do projeto:
+
+```bash
+make clean
+```
+
+> `make clean` remove os arquivos gerados dentro do projeto; ele não desinstala arquivos que já tenham sido copiados para o diretório de instalação.
