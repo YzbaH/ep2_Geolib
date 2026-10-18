@@ -66,7 +66,7 @@ int main(void) {
 
     // Testa a área correta da esfera.
     if ((status = areaEsfera(&esfTest, &resultado)) != GEO_OK ||
-        fabs(resultado - 50.24) >= GEO_EPS) {
+        fabs(resultado - 16.0 * GEO_PI) >= GEO_EPS) {
         testesFalhou++;
     } else {
         testesAprovados++;
@@ -92,7 +92,7 @@ int main(void) {
 
     // Testa a área correta do cilindro.
     if ((status = areaCilindro(&cilTest, &resultado)) != GEO_OK ||
-        fabs(resultado - 62.8) >= GEO_EPS) {
+        fabs(resultado - 20.0 * GEO_PI) >= GEO_EPS) {
         testesFalhou++;
     } else {
         testesAprovados++;
@@ -120,7 +120,7 @@ int main(void) {
 
     // Testa a área correta do cone.
     if ((status = areaCone(&coneTest, &resultado)) != GEO_OK ||
-        fabs(resultado - 31.4) >= GEO_EPS) {
+        fabs(resultado - 10.0 * GEO_PI) >= GEO_EPS) {
         testesFalhou++;
     } else {
         testesAprovados++;
@@ -146,7 +146,7 @@ int main(void) {
 
     // Testa a área correta do tetraedro.
     if ((status = areaTetraedro(&tetraTest, &resultado)) != GEO_OK ||
-        fabs(resultado - 6.92) >= GEO_EPS) {
+        fabs(resultado - 4.0 * SQRT3) >= GEO_EPS) {
         testesFalhou++;
     } else {
         testesAprovados++;

@@ -7,6 +7,9 @@
 #define GEOESPACIAL_H
 
 #include "geo_common.h"
+/**Aproximações de raízes quadradas úteis para os cálculos */
+#define SQRT2 1.41421356237309504880
+#define SQRT3 1.73205080756887729353
 
 /** Cubo */
 typedef struct {
@@ -73,7 +76,6 @@ geo_status areaParalelepipedo(const geo_paralelepipedo *p, double *area);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se e ou area for NULL;
  *         GEO_ERR_INVALID se e->raio <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status areaEsfera(const geo_esfera *e, double *area);
 
@@ -84,7 +86,6 @@ geo_status areaEsfera(const geo_esfera *e, double *area);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se c ou area for NULL;
  *         GEO_ERR_INVALID se o raio ou a altura for <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status areaCilindro(const geo_cilindro *c, double *area);
 
@@ -95,7 +96,6 @@ geo_status areaCilindro(const geo_cilindro *c, double *area);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se c ou area for NULL;
  *         GEO_ERR_INVALID se o raio ou a geratriz for <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status areaCone(const geo_cone *c, double *area);
 
@@ -106,7 +106,6 @@ geo_status areaCone(const geo_cone *c, double *area);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se t ou area for NULL;
  *         GEO_ERR_INVALID se t->aresta <= 0.
- * @note A implementação usa SQRT3 como aproximação de raiz de 3.
  */
 geo_status areaTetraedro(const geo_tetraedro *t, double *area);
 
@@ -137,7 +136,6 @@ geo_status volumeParalelepipedo(const geo_paralelepipedo *p, double *volume);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se e ou volume for NULL;
  *         GEO_ERR_INVALID se e->raio <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status volumeEsfera(const geo_esfera *e, double *volume);
 
@@ -148,7 +146,6 @@ geo_status volumeEsfera(const geo_esfera *e, double *volume);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se c ou volume for NULL;
  *         GEO_ERR_INVALID se o raio ou a altura for <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status volumeCilindro(const geo_cilindro *c, double *volume);
 
@@ -159,7 +156,6 @@ geo_status volumeCilindro(const geo_cilindro *c, double *volume);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se c ou volume for NULL;
  *         GEO_ERR_INVALID se o raio ou a altura for <= 0.
- * @note A implementação usa ANALITIC2D_PI como aproximação de pi.
  */
 geo_status volumeCone(const geo_cone *c, double *volume);
 
@@ -170,7 +166,6 @@ geo_status volumeCone(const geo_cone *c, double *volume);
  * @return GEO_OK em caso de sucesso;
  *         GEO_ERR_NULL se t ou volume for NULL;
  *         GEO_ERR_INVALID se t->aresta <= 0.
- * @note A implementação usa SQRT2 como aproximação de raiz de 2.
  */
 geo_status volumeTetraedro(const geo_tetraedro *t, double *volume);
 

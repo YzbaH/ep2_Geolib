@@ -10,8 +10,10 @@ LIB_NAME = geolib
 STATIC_LIB = lib$(LIB_NAME).a
 DYNAMIC_LIB = lib$(LIB_NAME).so
 TEST_EXEC = test_runner
+APP_SRC = app/main.c
+APP_EXEC = app/main
 
-PREFIX ?= /usr/local
+PREFIX ?= $(HOME)/.local
 
 # Captura todos os arquivos .c automaticamente
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -19,6 +21,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRCS))
 
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.c, $(TEST_DIR)/%.o, $(TEST_SRCS))
+TEST_BINS = $(patsubst $(TEST_DIR)/%.c,$(TEST_DIR)/%,$(TEST_SRCS))
 
 .PHONY: all clean run test install
 
@@ -42,18 +45,30 @@ $(DYNAMIC_LIB): $(OBJS)
 
 # clean: Remove os artefatos gerados pela compilação
 clean:
-	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o $(STATIC_LIB) $(DYNAMIC_LIB) $(TEST_EXEC)
+	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o \
+	      $(TEST_BINS) $(STATIC_LIB) $(DYNAMIC_LIB) \
+	      $(TEST_EXEC) $(APP_EXEC)
+
+# Compila a aplicação
+$(APP_EXEC): $(APP_SRC) $(STATIC_LIB)
+	$(CC) $(CFLAGS) $(APP_SRC) $(STATIC_LIB) $(LDFLAGS) -o $@
+
 
 # run: Compila quando necessário e executa a aplicação
-run: all
-	@echo "Aplicação executada com sucesso."
+run: $(APP_EXEC)
+	./$(APP_EXEC)
+
 
 # test: Compila e executa automaticamente os testes
-test: $(TEST_EXEC)
-	./$(TEST_EXEC)
+.PHONY: test
 
-$(TEST_EXEC): $(TEST_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+test: $(OBJS) $(TEST_OBJS)
+	@for teste in $(TEST_DIR)/*.o; do \
+		nome=$${teste%.o}; \
+		echo "Executando $$nome..."; \
+		$(CC) $(CFLAGS) "$$teste" $(OBJS) $(LDFLAGS) -o "$$nome" || exit 1; \
+		"$$nome" || exit 1; \
+	done
 
 # install: Instala a biblioteca e os arquivos de interface
 install: all
