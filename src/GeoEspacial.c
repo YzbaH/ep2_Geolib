@@ -1,9 +1,8 @@
 #include "GeoEspacial.h"
 #include <stddef.h>
 
-#define ANALITIC2D_PI 3.14
-#define SQRT2 1.41
-#define SQRT3 1.73
+#define SQRT2 1.41421356237309504880
+#define SQRT3 1.73205080756887729353
 
 geo_status areaCubo(const geo_cubo *a, double *area){
     if (a == NULL || area == NULL) return GEO_ERR_NULL;
@@ -27,7 +26,7 @@ geo_status areaEsfera(const geo_esfera *e, double *area){
     if (e == NULL || area == NULL) return GEO_ERR_NULL;
     if (e->raio <= 0) return GEO_ERR_INVALID;
 
-    *area = 4.0 * ANALITIC2D_PI * (e->raio) * (e->raio);
+    *area = 4.0 * GEO_PI * (e->raio) * (e->raio);
 
     return GEO_OK;
 }
@@ -36,7 +35,7 @@ geo_status areaCilindro(const geo_cilindro *c, double *area){
     if (c == NULL || area == NULL) return GEO_ERR_NULL;
     if (c->raio <= 0 || c->altura <= 0) return GEO_ERR_INVALID;
 
-    *area = 2.0 * ANALITIC2D_PI * (c->raio) * ((c->raio) + (c->altura));
+    *area = 2.0 * GEO_PI * (c->raio) * ((c->raio) + (c->altura));
 
     return GEO_OK;
 }
@@ -45,7 +44,7 @@ geo_status areaCone(const geo_cone *c, double *area){
     if (c == NULL || area == NULL) return GEO_ERR_NULL;
     if (c->raio <= 0 || c->geratriz <= 0) return GEO_ERR_INVALID;
 
-    *area = ANALITIC2D_PI * (c->raio) * ((c->raio) + (c->geratriz));
+    *area = GEO_PI * (c->raio) * ((c->raio) + (c->geratriz));
 
     return GEO_OK;
 }
@@ -82,7 +81,7 @@ geo_status volumeEsfera(const geo_esfera *e, double *volume){
     if (e->raio <= 0) return GEO_ERR_INVALID;
 
     double r = e->raio;
-    *volume = (4.0 * ANALITIC2D_PI * r * r * r) / 3.0;
+    *volume = (4.0 * GEO_PI * r * r * r) / 3.0;
 
     return GEO_OK;
 }
@@ -91,7 +90,7 @@ geo_status volumeCilindro(const geo_cilindro *c, double *volume){
     if (c == NULL || volume == NULL) return GEO_ERR_NULL;
     if (c->raio <= 0 || c->altura <= 0) return GEO_ERR_INVALID;
 
-    *volume = ANALITIC2D_PI * (c->raio) * (c->raio) * (c->altura);
+    *volume = GEO_PI * (c->raio) * (c->raio) * (c->altura);
 
     return GEO_OK;
 }
@@ -100,7 +99,7 @@ geo_status volumeCone(const geo_cone *c, double *volume){
     if (c == NULL || volume == NULL) return GEO_ERR_NULL;
     if (c->raio <= 0 || c->altura <= 0) return GEO_ERR_INVALID;
 
-    *volume = (ANALITIC2D_PI * (c->raio) * (c->raio) * (c->altura)) / 3.0;
+    *volume = (GEO_PI * (c->raio) * (c->raio) * (c->altura)) / 3.0;
 
     return GEO_OK;
 }
