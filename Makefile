@@ -49,11 +49,15 @@ run: all
 	@echo "Aplicação executada com sucesso."
 
 # test: Compila e executa automaticamente os testes
-test: $(TEST_EXEC)
-	./$(TEST_EXEC)
+.PHONY: test
 
-$(TEST_EXEC): $(TEST_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+test: $(OBJS) $(TEST_OBJS)
+	@for teste in $(TEST_DIR)/*.o; do \
+		nome=$${teste%.o}; \
+		echo "Executando $$nome..."; \
+		$(CC) $(CFLAGS) "$$teste" $(OBJS) $(LDFLAGS) -o "$$nome" || exit 1; \
+		"$$nome" || exit 1; \
+	done
 
 # install: Instala a biblioteca e os arquivos de interface
 install: all
