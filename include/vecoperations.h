@@ -6,14 +6,8 @@
 #ifndef MODULO3_H
 #define MODULO3_H
 
-#define GEO_EPS 1e-9
+#include "geo_common.h"
 
-typedef enum {
-    GEO_OK = 0,       
-    GEO_ERR_NULL,      
-    GEO_ERR_INVALID,   
-    GEO_ERR_DEGENERATE   
-} geo_status;
 /**
  * @brief vetor 2D
  */
@@ -145,7 +139,7 @@ geo_status produtoescalarv3(vec3 a, vec3 b, double *outresult);
  * @param outresult Ponteiro que aponta para o vetor 3D resultado
  * @return GEO_OK ou GEO_ERR_NULL
  */
-geo_status produtovetorialv3(vec3 a, vec3 b, double *outresult); 
+geo_status produtovetorialv3(vec3 a, vec3 b, vec3 *outresult); 
 /**
  * @brief verifica se 2 vetores 3D são LI ou LD
  * @param a vec 3D 1
