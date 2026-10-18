@@ -1,8 +1,6 @@
 #include "GeoEspacial.h"
 #include <stddef.h>
 
-#define SQRT2 1.41421356237309504880
-#define SQRT3 1.73205080756887729353
 
 geo_status areaCubo(const geo_cubo *a, double *area){
     if (a == NULL || area == NULL) return GEO_ERR_NULL;
