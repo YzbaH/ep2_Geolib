@@ -13,7 +13,7 @@ TEST_EXEC = test_runner
 APP_SRC = app/main.c
 APP_EXEC = app/main
 
-PREFIX ?= /usr/local
+PREFIX ?= $(HOME)/.local
 
 # Captura todos os arquivos .c automaticamente
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -21,6 +21,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRCS))
 
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.c, $(TEST_DIR)/%.o, $(TEST_SRCS))
+TEST_BINS = $(patsubst $(TEST_DIR)/%.c,$(TEST_DIR)/%,$(TEST_SRCS))
 
 .PHONY: all clean run test install
 
@@ -44,7 +45,9 @@ $(DYNAMIC_LIB): $(OBJS)
 
 # clean: Remove os artefatos gerados pela compilação
 clean:
-	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o $(STATIC_LIB) $(DYNAMIC_LIB) $(TEST_EXEC) $(APP_EXEC)
+	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o \
+	      $(TEST_BINS) $(STATIC_LIB) $(DYNAMIC_LIB) \
+	      $(TEST_EXEC) $(APP_EXEC)
 
 # Compila a aplicação
 $(APP_EXEC): $(APP_SRC) $(STATIC_LIB)
