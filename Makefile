@@ -10,6 +10,8 @@ LIB_NAME = geolib
 STATIC_LIB = lib$(LIB_NAME).a
 DYNAMIC_LIB = lib$(LIB_NAME).so
 TEST_EXEC = test_runner
+APP_SRC = app/main.c
+APP_EXEC = app/main
 
 PREFIX ?= /usr/local
 
@@ -42,11 +44,17 @@ $(DYNAMIC_LIB): $(OBJS)
 
 # clean: Remove os artefatos gerados pela compilação
 clean:
-	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o $(STATIC_LIB) $(DYNAMIC_LIB) $(TEST_EXEC)
+	rm -f $(SRC_DIR)/*.o $(TEST_DIR)/*.o $(STATIC_LIB) $(DYNAMIC_LIB) $(TEST_EXEC) $(APP_EXEC)
+
+# Compila a aplicação
+$(APP_EXEC): $(APP_SRC) $(STATIC_LIB)
+	$(CC) $(CFLAGS) $(APP_SRC) $(STATIC_LIB) $(LDFLAGS) -o $@
+
 
 # run: Compila quando necessário e executa a aplicação
-run: all
-	@echo "Aplicação executada com sucesso."
+run: $(APP_EXEC)
+	./$(APP_EXEC)
+
 
 # test: Compila e executa automaticamente os testes
 .PHONY: test
