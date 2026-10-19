@@ -253,5 +253,5 @@ int main(void) {
     printf("Passou: %d\n", testesAprovados);
     printf("Falhou: %d\n", testesFalhou);
 
-    return 0;
+    return (testesFalhou > 0) ? 1 : 0;
 }

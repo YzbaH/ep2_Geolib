@@ -3,8 +3,6 @@
 #include <math.h>
 #include "vecoperations.h"
 
-#define GEO_EPS 1e-9
-
 
 geo_status somavec2(vec2 a, vec2 b,vec2 *outresult){
     if(outresult == NULL){
@@ -113,7 +111,7 @@ geo_status normalizav2(vec2 a, vec2 *outresult){
     outresult->y = a.y / norma;
     return GEO_OK;
 }
-geo_status igauldadev2(vec2 a, vec2 b, int *outresult){
+geo_status igualdadev2(vec2 a, vec2 b, int *outresult){
     if(outresult == NULL){
         return GEO_ERR_NULL;
     }
@@ -173,9 +171,15 @@ geo_status dependencialinearv3(vec3 a, vec3 b, int *eld){
         return GEO_ERR_NULL;
     }
     vec3 prodvet;
-    produtovetorialv3(a, b, &prodvet);
     double norma_pv;
-    normav3(prodvet, &norma_pv);
+    geo_status st = produtovetorialv3(a, b, &prodvet);
+    if (st != GEO_OK) {
+        return st;
+    }
+    st = normav3(prodvet, &norma_pv);
+    if (st != GEO_OK) {
+        return st;
+    }
     if (norma_pv < GEO_EPS) {
         *eld = 1; 
     } else {
@@ -250,7 +254,7 @@ geo_status normalizav3(vec3 a,vec3 *outresult){
 
     return GEO_OK;
 }
-geo_status igauldadev3(vec3 a, vec3 b, int *igual){
+geo_status igualdadev3(vec3 a, vec3 b, int *igual){
     if(igual == NULL){
         return GEO_ERR_NULL;
     }

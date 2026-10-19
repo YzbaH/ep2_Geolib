@@ -224,6 +224,6 @@ int main(void) {
     printf("Aprovados: %d\n", testesAprovados);
     printf("Falharam: %d\n", testesFalhou);
 
-    return 0;
+    return (testesFalhou > 0) ? 1 : 0;
 }
 

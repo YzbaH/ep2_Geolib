@@ -68,6 +68,7 @@ dkms.conf
 *.a
 *.so
 app/main
+app/main_dyn
 test_runner
 tests/*
 !tests/*.c
