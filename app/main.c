@@ -262,7 +262,7 @@ static void demo_vec2(void) {
     if (!falhou("dependencia linear", dependencialinearv2(u, v, &flag)))
         printf("u e v sao ................. %s\n",
                flag ? "linearmente dependentes (LD)" : "linearmente independentes (LI)");
-    if (!falhou("igualdade", igauldadev2(u, v, &flag)))
+    if (!falhou("igualdade", igualdadev2(u, v, &flag)))
         printf("u e v sao iguais? ......... %s\n", sim_nao(flag));
 }
 
@@ -297,7 +297,7 @@ static void demo_vec3(void) {
     if (!falhou("dependencia linear", dependencialinearv3(u, v, &flag)))
         printf("u e v sao ................. %s\n",
                flag ? "linearmente dependentes (LD)" : "linearmente independentes (LI)");
-    if (!falhou("igualdade", igauldadev3(u, v, &flag)))
+    if (!falhou("igualdade", igualdadev3(u, v, &flag)))
         printf("u e v sao iguais? ......... %s\n", sim_nao(flag));
 }
 

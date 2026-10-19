@@ -1,10 +1,10 @@
 /**
- * @file modulo3.h
+ * @file vecoperations.h
  * @brief realiza opeações basicas com vetores 2D e 3D
  */
 
-#ifndef MODULO3_H
-#define MODULO3_H
+#ifndef VECOPERATIONS_H
+#define VECOPERATIONS_H
 
 #include "geo_common.h"
 
@@ -62,8 +62,8 @@ geo_status produtoescalarv2(vec2 a, vec2 b, double *outresult );
  * @brief verifica se dois vetores 2D são LI ou LD
  * @param a vec 2D 1
  * @param b vec 2D 2
- * @param éld ponteiro int (*éld = 1(LD), *éld = 0(LI))
- * @return GEO_OK ou GEO_ERRO_NULL
+ * @param eld ponteiro int (*eld = 1(LD), *eld = 0(LI))
+ * @return GEO_OK ou GEO_ERR_NULL
  */
 geo_status dependencialinearv2(vec2 a, vec2 b, int *eld);
 /**
@@ -84,7 +84,7 @@ geo_status angulovec2(vec2 a, vec2 b, double *outresult);
 /**
  * @brief calcula um vetor de norma 1 com mesma direção e sentido do vetor passado
  * @param a vec 2D
- * @return GEO_OK ou GEO_ERR_NULL ou  GEO_ERR_INVALID se o vetor for 0
+ * @return GEO_OK ou GEO_ERR_NULL ou GEO_ERR_DEGENERATE se o vetor for 0
  * @pre a não pode ser igual a 0
  * @post a norma do vetor será 1 respeitando GEO_EPS 
  */
@@ -96,7 +96,7 @@ geo_status normalizav2(vec2 a, vec2 *outresult);
  * @param igual ponteiro que aponta para o resultado (*igual = 1(são iguais))
  * @return GEO_OK ou GEO_ERR_NULL
  */
-geo_status igauldadev2(vec2 a, vec2 b,int *igual);
+geo_status igualdadev2(vec2 a, vec2 b,int *igual);
 
 //OPERAÇÕES VEC3
 
@@ -160,13 +160,13 @@ geo_status normav3(vec3 a, double *outresult);
  * @param a vec 3D 1
  * @param b vec 3D 2
  * @param outresult aponta para resultado
- * @return GEO_OK ou GEO_ERR_NULL ou  GEO_ERR_INVALID 
+ * @return GEO_OK ou GEO_ERR_NULL ou GEO_ERR_DEGENERATE 
  */
 geo_status angulovec3(vec3 a, vec3 b, double *outresult);
 /**
  * @brief calcula um vetor de norma 1 com mesma direção e sentido do vetor passado
  * @param a vec 3D
- * @return GEO_OK ou GEO_ERR_NULL ou GEO_ERR_INVALID se algum dos vetores for 0
+ * @return GEO_OK ou GEO_ERR_NULL ou GEO_ERR_DEGENERATE se algum dos vetores for 0
  * @pre a não pode ser igual a 0
  * @post a norma do vetor será um respeitando GEO_EPS 1e-9
  */   
@@ -178,7 +178,7 @@ geo_status normalizav3(vec3 a,vec3 *outresult);
  * @param igual ponteiro que aponta para o resultadoou (*igual = 1 se sao iguais, 0 caso contrario)
  * @return GEO_OK ou ou GEO_ERR_NULL
  */
-geo_status igauldadev3(vec3 a, vec3 b, int *igual);
+geo_status igualdadev3(vec3 a, vec3 b, int *igual);
 
 
-#endif //MODULO3_H
+#endif //VECOPERATIONS_H
